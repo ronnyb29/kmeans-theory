@@ -10,7 +10,7 @@ mleDifferences = []
 
 
 def mle(GMM, X):
-	return -2 * GMM.score(X).sum()
+	return 2 * GMM.score(X).sum()
 
 def verifyConcavity(arr):
 	for x in xrange(0, len(arr) - 2):
@@ -24,19 +24,19 @@ for x in xrange(1,10):
 	# generate random observations with two modes centered on 0 and 100 
 	obs = np.concatenate((np.random.randn(100, 1), 100 + np.random.randn(300, 1)))
 	g.fit(obs)
-	print 'mle'
-	print mle(g, obs)
+	# print 'mle'
+	# print mle(g, obs)
 	mleArr.append(mle(g, obs))
 	bic.append(g.bic(obs))
 
-print mleArr
-print bic
+# print mleArr
+# print bic
 
 for x in xrange(1,len(mleArr) - 1):
 	mleDifferences.append(mleArr[x] - mleArr[x-1])	
 
-print mleDifferences
-print verifyConcavity(mleDifferences)
+# print mleDifferences
+# print verifyConcavity(mleDifferences)
 #usually not true
 
 plt.figure(1)
