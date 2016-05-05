@@ -4,9 +4,9 @@ from sklearn import mixture
 
 np.random.seed(1)
 
-mleArr = []
-bic = []
-mleDifferences = []
+mleArr = np.empty([2, 9])
+bic = np.empty([2, 9])
+mleDifferences = np.empty([2, 8])
 
 
 def verifyConcavity(arr):
@@ -26,31 +26,35 @@ for i in [1, 2]:
 	for x in xrange(1,10):
 		g = mixture.GMM(n_components=x)
 		# generate random observations with two modes centered on 0 and 100 
-		print np.shape(obs)
 		g.fit(obs)
-		mleArr.append(mle(g, obs))
-		bic.append(g.bic(obs))
+		mleArr[i - 1, x - 1] = mle(g, obs)
+		bic[i - 1, x - 1] = g.bic(obs)
+	mleDifferences[i-1] = np.diff(mleArr[i-1])
 
 
-mleDifferences = np.diff(mleArr)
+# 
+# print mleDifferences
 
-
-print mleDifferences
-# plt.figure(1)
-# plt.plot(numClusters, bic)
-# plt.ylabel('BIC')
-# plt.xlabel('Number of Clusters')
-# plt.title('BIC plot')
+#plotting a bunch of stuff
+plt.figure(1)
+plt.plot(numClusters, bic[0])
+plt.ylabel('BIC')
+plt.xlabel('Number of Clusters')
+plt.title('BIC plot')
+plt.show()
 
 plt.figure(2)
-plt.plot(numClusters, mleArr)
+plt.plot(numClusters, mleArr[0])
 plt.ylabel('Maximum Likelihood Estimator')
 plt.xlabel('Number of Clusters')
 plt.title('MLE plot')
-# plt.show()
+plt.show()
+
+print 'shape of numClusters is ' +  np.shape(numClusters[0:-2])
+print 'shape of mleDifferences[0] is ' + np.shape(mleDifferences[0])
 
 plt.figure(3)
-plt.plot(mleDifferences, 'o')
+plt.plot(numClusters[0:-2], mleDifferences[0], 'o')
 plt.title('MLE Differences')
 plt.ylabel('Difference in Maximum Likelihood Estimator')
 plt.xlabel('Number of Clusters')
