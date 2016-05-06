@@ -8,11 +8,9 @@ import sklearn.datasets
 
 np.random.seed(1)
 
-mleArr = np.empty([9, 9])
-bic = np.empty([9, 9])
-mleDifferences = np.empty([9, 8])
-
-
+mleArr = np.empty([10, 10])
+bic = np.empty([10, 10])
+mleDifferences = np.empty([10, 9])
 
 
 def compute_bic(kmeans,X):
@@ -78,14 +76,37 @@ def compute_mle(kmeans, X):
 
 	return(MLE)
 
-
-numClusters = [i for i in range(1,10)]
+numClusters = [i for i in range(1,11)] #goes from 1 to 9
 obs = np.random.randn(100, 1)
-for i in xrange(1,10):
+for i in xrange(1,11):
 	obs = np.concatenate((obs, i*300 + np.random.randn(100, 1)))
-	for x in xrange(1,10):
+	for x in xrange(1,11):
 		kmeans = cluster.KMeans(n_clusters = x, init='k-means++')
 		kmeans.fit(obs)
+		#the guy who's stack overflow i got the inspiration from for fixing his BIC has the most pythonic way of doing these few lines, it's beautiful
 		mleArr[i - 1, x - 1] = compute_mle(kmeans, obs)
 		bic[i - 1, x - 1] = compute_bic(kmeans, obs)
 	mleDifferences[i-1] = np.diff(mleArr[i-1])
+
+
+#plotting a bunch of stuff
+plt.figure(1)
+plt.plot(numClusters, bic[7])
+plt.ylabel('BIC')
+plt.xlabel('Number of Clusters')
+plt.title('BIC plot')
+plt.show()
+
+plt.figure(2)
+plt.plot(numClusters, mleArr[7])
+plt.ylabel('Maximum Likelihood Estimator')
+plt.xlabel('Number of Clusters')
+plt.title('MLE plot')
+plt.show()
+
+plt.figure(3)
+plt.plot(numClusters[0:-1], mleDifferences[7], 'o')
+plt.title('MLE Differences')
+plt.ylabel('Difference in Maximum Likelihood Estimator')
+plt.xlabel('Number of Clusters')
+plt.show()

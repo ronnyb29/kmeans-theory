@@ -5,9 +5,9 @@ from sklearn import cluster
 
 np.random.seed(1)
 
-mleArr = np.empty([9, 9])
-bic = np.empty([9, 9])
-mleDifferences = np.empty([9, 8])
+mleArr = np.empty([10, 10])
+bic = np.empty([10, 10])
+mleDifferences = np.empty([10, 9])
 
 
 def verifyConcavity(arr):
@@ -20,11 +20,11 @@ def mle(GMM, X):
 	return GMM.score(X).sum() #score computes the log probability under the model, MLE by def is just the sum (assumes log likelihood)
 			
 
-numClusters = [i for i in range(1,10)]
+numClusters = range(1, 11)
 obs = np.random.randn(100, 1)
-for i in xrange(1,10):
+for i in xrange(1,11):
 	obs = np.concatenate((obs, i*300 + np.random.randn(100, 1)))
-	for x in xrange(1,10):
+	for x in xrange(1,11):
 		kmeans_init = cluster.KMeans(n_clusters = x, init='k-means++')
 		kmeans_init.fit(obs)
 		g = mixture.GMM(covariance_type='tied',  n_components=x, n_init=1, n_iter=100,  random_state=1, init_params = 'wc')
