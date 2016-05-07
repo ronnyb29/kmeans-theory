@@ -41,26 +41,27 @@ for i in xrange(1,11):
 
 
 #contruct probabiltiy distribution
-probabiltiyCorrect = np.empty([10, 2])
+probabilityCorrect = np.empty([10, 2])
 for i in xrange(0,10):
 	#go from 0 to 9. indexing via MLE differences. correct number is k-1, so actually i+1
-	opt_k = np.argmin(bic[i]) #gets optimal k for BIC for sample from i+2 clusters
-	theoretical_gt = opt_k
-	theoretical_lt = 9 - theoretical_gt
-	actual__gt  = 0 #actual number of correct greater thans
-	actual__lt  = 0 #actual number of correct greater thans
+	opt_k = np.argmin(bic[i]) #gets optimal k for BIC for sample from i+2 clusters. really this is opt_k - 1
+	theoretical_gt = float(opt_k)
+	theoretical_lt = float(9 - theoretical_gt)
+	actual_gt  = float(0) #actual number of correct greater thans
+	actual_lt  = float(0) #actual number of correct greater thans
+	#float necessary to do proper division
 	for x in xrange(0, 9):
 		if mleProperties[i, x] >= 0 and x < theoretical_gt:
-			actual__gt += 1
+			actual_gt += 1
 		if mleProperties[i, x] <= 0 and x >= theoretical_gt:
-			actual__lt += 1
-	percent_gt = actual__gt / theoretical_gt
+			actual_lt += 1
+	percent_gt = actual_gt / theoretical_gt
 	if theoretical_lt > 0:
-		percent_lt = actual__lt / theoretical_lt
+		percent_lt = actual_lt / theoretical_lt
 	else:
 		percent_lt = 1
 	
-	probabiltiyCorrect[i] = [percent_gt, percent_lt]
+	probabilityCorrect[i] = [percent_gt, percent_lt]
 
 #bic[0] corresponds to 2 'real' cluster centers
 #7 is the strange case
@@ -92,5 +93,15 @@ plt.plot(numClusters[0:-1], mleProperties[1], 'o')
 plt.title('Necessary Condition on MLE')
 plt.ylabel('Difference in Maximum Likelihood Estimator')
 plt.xlabel('Number of Clusters')
+plt.show()
+
+#Percentage correct
+plt.figure(5)
+plt.ylim(0, 1.5)
+plt.plot(numClusters, probabilityCorrect[:, 0], 'g', probabilityCorrect[:, 1], 'b')
+plt.title('Probability of Necessary Condition for unimodality occuring')
+plt.ylabel('probability')
+plt.xlabel('Number of Clusters')
+
 plt.show()
 

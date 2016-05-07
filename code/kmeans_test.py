@@ -11,6 +11,7 @@ np.random.seed(1)
 mleArr = np.empty([10, 10])
 bic = np.empty([10, 10])
 mleDifferences = np.empty([10, 9])
+mleProperties = np.empty([10, 9])
 
 
 def compute_bic(kmeans,X):
@@ -87,6 +88,33 @@ for i in xrange(1,11):
 		mleArr[i - 1, x - 1] = compute_mle(kmeans, obs)
 		bic[i - 1, x - 1] = compute_bic(kmeans, obs)
 	mleDifferences[i-1] = np.diff(mleArr[i-1])
+    mleProperties[i-1] = mleDifferences[i-1] - np.log(obs.shape[0]) #subtract difference in penalties
+
+#contruct probabiltiy distribution
+probabilityCorrect = np.empty([10, 2])
+for i in xrange(0,10):
+    #go from 0 to 9. indexing via MLE differences. correct number is k-1, so actually i+1
+    opt_k = np.argmin(bic[i]) #gets optimal k for BIC for sample from i+2 clusters. really this is opt_k - 1
+    theoretical_gt = float(opt_k)
+    theoretical_lt = float(9 - theoretical_gt)
+    actual_gt  = float(0) #actual number of correct greater thans
+    actual_lt  = float(0) #actual number of correct greater thans
+    #float necessary to do proper division
+    for x in xrange(0, 9):
+        if mleProperties[i, x] >= 0 and x < theoretical_gt:
+            actual_gt += 1
+        if mleProperties[i, x] <= 0 and x >= theoretical_gt:
+            actual_lt += 1
+    percent_gt = actual_gt / theoretical_gt
+    if theoretical_lt > 0:
+        percent_lt = actual_lt / theoretical_lt
+    else:
+        percent_lt = 1
+    
+    probabilityCorrect[i] = [percent_gt, percent_lt]
+
+#bic[0] corresponds to 2 'real' cluster centers
+#7 is the strange case
 
 
 #plotting a bunch of stuff
