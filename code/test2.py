@@ -24,9 +24,9 @@ def mle(GMM, X):
 			
 
 numClusters = range(1, 11)
-obs = np.random.randn(100, 1)
+obs = np.random.randn(1000, 1)
 for i in xrange(1,11):
-	obs = np.concatenate((obs, i*300 + np.random.randn(100, 1)))
+	obs = np.concatenate((obs, i*300 + np.random.randn(1000, 1)))
 	for x in xrange(1,11):
 		kmeans_init = cluster.KMeans(n_clusters = x, init='k-means++')
 		kmeans_init.fit(obs)

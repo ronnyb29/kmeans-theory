@@ -82,7 +82,7 @@
 
 				<section data-markdown>
 					<script type="text/template">
-						## Want to show
+						## Conjecture
 
 						BIC is unimodal for fitting a mixture of Gaussians:
 						- Theory
@@ -169,6 +169,17 @@
 
 				<section data-markdown>
 					<script type="text/template">
+						## Challenges
+
+						- No closed form solution for $\hat{L}$ as function of $k$ for GMM
+						- Hard to compute $E[BIC]$
+						- Ascertaining relevant probability bounds
+						
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
 						## Monotonically increasing $\hat{L}$ for GMM as function of k
 						$\hat{L}(k = c+1 | x) \geq \hat{L}(k = c |x) \forall c\geq 0$ conditioned on $x$, where $k$ again is the number of parameters to be estimated, $c \in \mathbb{Z_+}$.
 					</script>
@@ -209,6 +220,16 @@
 					<h1>Numercal Experiments</h1>
 				</section>
 
+				<section data-markdown>
+					<script type="text/template">
+						## Challenges
+
+						- Fitting GMM correctly to get maximum likelihood instead of converging to a local min in the EM algorithm
+						- Avoiding degenerate cases
+						- Determining models that are relevant to the conjecture
+						
+					</script>
+				</section>
 
 				<section data-markdown>
 					<script type="text/template">
@@ -245,6 +266,44 @@
 
 				<section>
 					<img src="../figs/gmm/n=1000/MLEprop_GMM_3.png">
+				</section>
+
+				<section>
+					<img src="../figs/gmm/n=100/prob_nec_cond_GMM.png">
+				</section>
+
+				<section>
+					<h2>k-means</h2>
+
+					<p>May note that there is no maximum likelihood for k-means, this is a "hack-y" way using k-means as a specific case of GMM</p>
+				</section>
+
+
+				<section>
+					<img src="../figs/kmeans/BIC_9.png">
+				</section>
+
+				<section>
+					<img src="../figs/kmeans/MLE_9.png">
+				</section>
+
+				<section>
+					<img src="../figs/kmeans/mle_prop_9.png">
+				</section>
+
+				<section>
+					<img src="../figs/kmeans/prob_nec_cond.png">
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						## Conclusions
+
+						- Conjecture may not be true, but likelihood function has relevant properties
+						- Numerical experiments show potential that sufficient condition may hold with a high probability
+						- We may be able to find the optimal $k^*$, but currently without a theoretical guarantee
+						
+					</script>
 				</section>
 
 				<section data-markdown>

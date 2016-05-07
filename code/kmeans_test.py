@@ -142,10 +142,18 @@ plt.ylabel('Difference in Maximum Likelihood Estimator')
 plt.xlabel('Number of Clusters')
 plt.show()
 
+plt.figure(4)
+plt.plot(numClusters[0:-1], mleProperties[7], 'o')
+plt.title('Necessary Condition on MLE')
+plt.ylabel('Difference in Maximum Likelihood Estimator')
+plt.xlabel('Number of Clusters')
+plt.show()
+
+
 #Percentage correct
 plt.figure(5)
 plt.ylim(0, 1.5)
-plt.plot(numClusters, probabilityCorrect[:, 0], 'g', probabilityCorrect[:, 1], 'b')
+plt.plot(numClusters, probabilityCorrect[:, 0], 'g', numClusters, probabilityCorrect[:, 1], 'b')
 green_patch = mpatches.Patch(color='green', label='k < k*')
 blue_patch = mpatches.Patch(color='blue', label='k > k*')
 plt.legend(handles=[green_patch, blue_patch])
