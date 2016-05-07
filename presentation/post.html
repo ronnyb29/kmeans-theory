@@ -97,7 +97,7 @@
 
 						- *Current*: grid search, X-means, G-means, etc.
 						- *Algorithms*: k-means, expectation maximization (EM)
-						- *Efficiency*: can efficiently search k
+						- *Efficiency*: can efficiently search k to find $k^* = argmin_k BIC(k)$
 
 					</script>
 				</section>
@@ -113,7 +113,7 @@
 						Widely-used model selection criterion
 
 						\begin{equation}
-							E=mc^2
+							BIC = -2ln(\hat{L}(X | \theta)) + k(ln(n) - ln(2 \times \pi))
 						\end{equation}
 						
 					</script>
@@ -127,7 +127,7 @@
 
 						Refers to function having a single peak
 
-						A function $f(x)$ is a unimodal function if for some $m$, it is monotonically increasing for $x ≤ m$ and monotonically decreasing for $x ≥ m$. In that case, the maximum value of $f(x)$ is $f(m)$ and there are no other local maxima
+						A function $f(x)$ is a unimodal function if for some $m$, it is monotonically increasing for $x ≤ m$ and monotonically decreasing for $x ≥ m$. In that case, the maximum value of $f(x)$ is $f(m)$ and there are no other local maxima.
 						
 						We will use a modified definition for convience which in essence just flips the direction of the definition instead of analyzing $-BIC$
 
@@ -152,12 +152,57 @@
 
 						Like a regular Gaussian, but mixed with other Gaussians
 
+						$p(x) = \sum_{i=1}^{k} \pi_i N(X | \mu_i, \Sigma_i)$, where
+
 						\begin{equation}
-							E=mc^2
+							0 \leq \pi_i \leq 1
 						\end{equation}
+
+						\begin{equation}
+							\sum_{i=1}^k \pi_i
+						\end{equation}
+
+						For k-means vs. EM, refer to Appendix B in GPCA
 						
 					</script>
 				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						## Monotonically increasing $\hat{L}$ for GMM as function of k
+						$\hat{L}(k = c+1 | x) \geq \hat{L}(k = c |x) \forall c\geq 0$ conditioned on $x$, where $k$ again is the number of parameters to be estimated, $c \in \mathbb{Z_+}$.
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						## Sketch of proof
+
+						\begin{equation}
+							GMM_k \subset GMM_k + 1
+						\end{equation}
+
+						where $GMM_i$ is the set of all Gaussian mixture models with $i$ Gaussians mixed
+
+						$A \subset B$, $Pr(B) \geq Pr(A)$
+
+						$ln$ is a monotonically increasing function, so summation of inequality on both sides
+						
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						## Necessary conditions
+
+						$ln(\hat{L}(k+1)) - ln(\hat{L}(k)) \geq \frac{ln(n) - ln(2 \times \pi)}{2} \forall k < k^*$
+
+						$ln(\hat{L}(k+1)) - ln(\hat{L}(k)) \leq \frac{ln(n) - ln(2 \times \pi)}{2} \forall k \geq k^*$
+						
+						
+					</script>
+				</section>
+
 
 
 				<section>
@@ -174,6 +219,7 @@
 						- Fit k GMM / run k-means on dataset with k = 1, 2, ... , 10
 						- Compute BIC and MLE and analyze functional properties
 						- Avoid degeneragte cases of $MLE \rightarrow \infty$ 
+						- Test for different number of samples to account for bias-variance tradeoff when fitting GMM
 					</script>
 				</section>
 
@@ -183,6 +229,22 @@
 
 				<section>
 					<h1>Results</h1>
+				</section>
+
+				<section>
+					<h2>GMM</h2>
+				</section>
+
+				<section>
+					<img src="../figs/gmm/n=1000/BIC_GMM_3.png">
+				</section>
+
+				<section>
+					<img src="../figs/gmm/n=1000/MLE_GMM_3.png">
+				</section>
+
+				<section>
+					<img src="../figs/gmm/n=1000/MLEprop_GMM_3.png">
 				</section>
 
 				<section data-markdown>
