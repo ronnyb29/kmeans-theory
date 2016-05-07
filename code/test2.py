@@ -2,6 +2,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 from sklearn import mixture
 from sklearn import cluster
+import matplotlib.patches as mpatches
+
 
 np.random.seed(1)
 
@@ -98,10 +100,12 @@ plt.show()
 #Percentage correct
 plt.figure(5)
 plt.ylim(0, 1.5)
-plt.plot(numClusters, probabilityCorrect[:, 0], 'g', probabilityCorrect[:, 1], 'b')
+plt.plot(numClusters, probabilityCorrect[:, 0], 'g', numClusters, probabilityCorrect[:, 1], 'b')
+green_patch = mpatches.Patch(color='green', label='k < k*')
+blue_patch = mpatches.Patch(color='blue', label='k > k*')
+plt.legend(handles=[green_patch, blue_patch])
 plt.title('Probability of Necessary Condition for unimodality occuring')
 plt.ylabel('probability')
 plt.xlabel('Number of Clusters')
-
 plt.show()
 
