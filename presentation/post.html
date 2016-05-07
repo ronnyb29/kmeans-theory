@@ -65,7 +65,7 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 				<section>
-					<h2>Finding the Optimal k for k-means through examination of BIC</h2>
+					<h2>Finding the Optimal k for k-means through examination of BIC for MoG</h2>
 					<h3>May 6, 2016</h3>
 					<h3>neurodata</h3>
 					<p>600.692 Advanced Topics in Machine Learning: Modeling and Segmentation</p>
@@ -76,29 +76,97 @@
 				</section>
 
 
+				<section data-markdown>
+					<script type="text/template">
+						## Want to show
+
+						BIC is unimodal for fitting a mixture of Gaussians:
+						- Theory
+						- Numerical Experiments
+
+					</script>
+				</section>
+
+				<section>
+					<h1>Definitions</h1>
+				</section>
 
 				<section data-markdown>
 					<script type="text/template">
-						# Meeting Goal
+						## Bayesian Information Criterion (BIC)
 
-						Identify ~7  globally beneficial brain science projects ("killer apps"):
-						- *Significant*: they will yield tangible societal/economic/medical benefits to the world
-						- *Feasible*: we can achieve major milestones within 10 years given existing funding opportunities
-						- *Inclusive*: all nations of the world can meaningfully contribute
-						- *Collectively diverse*: apps span a wide range of brain sciences
+						Widely-used model selection criterion
+
+						\begin{equation}
+							E=mc^2
+						\end{equation}
+						
 					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						## Unimodal
+
+						Refers to function having a single peak
+
+						Continuous:
+						\begin{equation}
+							E=mc^2
+						\end{equation}
+
+						Discrete (more important):
+						\begin{equation}
+							E=mc^2
+						\end{equation}
+						
+
+					</script>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						# Relevance
+
+						- *Current*: grid search, X-means, G-means, etc.
+						- *Algorithms*: k-means, expectation maximization (EM)
+						- *Efficiency*: can efficiently search k
+
+					</script>
+				</section>
+
+				<section>
+					<h1>Theory</h1>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						## Mixture of Gaussians
+
+						Like a regular Gaussian, but mixed with other Gaussians
+
+						\begin{equation}
+							E=mc^2
+						\end{equation}
+						
+					</script>
+				</section>
+
+
+				<section>
+					<h1>Numercal Experiments</h1>
 				</section>
 
 
 
 				<section data-markdown>
 					<script type="text/template">
-						## Specs
+						## Experimental Setup
 
-						- 60+ scientists including:  Alan Evans, Mu-ming Poo, Art Toga, Terry Sejnowski, Cori Bargmann, Dora Angelaki, Katrin Amunts, Sean Hill, Larry Swanson, George Church, Konrad Kording, Miguel Nicolelis, Nelson Spruston
-						- 20%+ female
-						- 15 "observers" (NIH, NSF, DARPA, IARPA)
-						- 12 countries
+						- Sample from k MoG where k = 1, 2, ... , 10 for different sizes of N
+						- Mixture of Gaussians (univariate) with \begin{equation} \sigma_i = 1, \mu_i = i \times 300 \end{equation}
+						- Fit k GMM / run k-means on dataset with k = 1, 2, ... , 10
+						- Compute BIC and MLE and analyze functional properties
 					</script>
 				</section>
 
@@ -189,15 +257,6 @@
 					</script>
 				</section>
 
-
-
-				<section>
-						
-					\begin{equation}
-					E=mc^2
-					\end{equation}
-
-				</section>
 
 
 
