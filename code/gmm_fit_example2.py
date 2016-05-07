@@ -23,7 +23,7 @@ gmm.fit(X)
 
 color_iter = itertools.cycle(['r', 'g', 'b', 'c', 'm'])
 
-for i, (clf, title) in enumerate([(gmm, 'GMM clustered into 3 components')]):
+for i, (clf, title) in enumerate([(gmm, 'Sampled data from 3-MoG fit by GMM clustered with 3 components')]):
     splot = plt.plot()
     Y_ = clf.predict(X)
     for i, (mean, covar, color) in enumerate(zip(
@@ -45,8 +45,6 @@ for i, (clf, title) in enumerate([(gmm, 'GMM clustered into 3 components')]):
 
     plt.xlim(-5, 605)
     plt.ylim(-1, 1)
-    plt.xticks(())
-    plt.yticks(())
     plt.title(title)
 
 plt.show()
