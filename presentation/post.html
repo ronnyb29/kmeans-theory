@@ -91,6 +91,17 @@
 					</script>
 				</section>
 
+				<section data-markdown>
+					<script type="text/template">
+						# Relevance
+
+						- *Current*: grid search, X-means, G-means, etc.
+						- *Algorithms*: k-means, expectation maximization (EM)
+						- *Efficiency*: can efficiently search k
+
+					</script>
+				</section>
+
 				<section>
 					<h1>Definitions</h1>
 				</section>
@@ -112,39 +123,24 @@
 
 				<section data-markdown>
 					<script type="text/template">
-						## Unimodal
+						## Unimodal function
 
 						Refers to function having a single peak
 
-						Continuous:
-						\begin{equation}
-							E=mc^2
-						\end{equation}
-
-						Discrete (more important):
-						\begin{equation}
-							E=mc^2
-						\end{equation}
+						A function $f(x)$ is a unimodal function if for some $m$, it is monotonically increasing for $x ≤ m$ and monotonically decreasing for $x ≥ m$. In that case, the maximum value of $f(x)$ is $f(m)$ and there are no other local maxima
 						
+						We will use a modified definition for convience which in essence just flips the direction of the definition instead of analyzing $-BIC$
 
 					</script>
 				</section>
+
 
 				<section>
 					<h2>Unimodal</h2>
 					<img src="assets/img/unimodal.gif">
 				</section>
 
-				<section data-markdown>
-					<script type="text/template">
-						# Relevance
-
-						- *Current*: grid search, X-means, G-means, etc.
-						- *Algorithms*: k-means, expectation maximization (EM)
-						- *Efficiency*: can efficiently search k
-
-					</script>
-				</section>
+				
 
 				<section>
 					<h1>Theory</h1>
@@ -169,7 +165,6 @@
 				</section>
 
 
-
 				<section data-markdown>
 					<script type="text/template">
 						## Experimental Setup
@@ -178,88 +173,28 @@
 						- Mixture of Gaussians (univariate) with \begin{equation} \sigma_i = 1, \mu_i = i \times 300 \end{equation}
 						- Fit k GMM / run k-means on dataset with k = 1, 2, ... , 10
 						- Compute BIC and MLE and analyze functional properties
+						- Avoid degeneragte cases of $MLE \rightarrow \infty$ 
 					</script>
 				</section>
 
-
-
-				<section data-markdown>
-					<script type="text/template">
-						## Schedule
-
-						### Thursday 
-						- Opening remarks: State Dept.
-						- Lightning rounds
-						- National Brain Observatory
-						- International Brain Programs
-						- 6 break-out sessions
-						- Day summary
-
-					</script>
+				<section>
+					<img src="../figs/easy_cluster.png">
 				</section>
 
-
-
-				<section data-markdown>
-					<script type="text/template">
-						## Schedule
-
-						### Friday
-						- Opening remarks: NINDS head
-						- Round robins
-						- President Daniel's Address
-						- Round robins
-						- Final summary
-						- Cocktail party
-
-					</script>
+				<section>
+					<h1>Results</h1>
 				</section>
 
-
 				<section data-markdown>
 					<script type="text/template">
-						## Killer Apps
+						## Next Steps
 
-						1. What makes our brains unique?
-						2. Learning in complex environments
-						3. Unifying neuroology & psychiatry
-
-<br>
-
-						#### International Brain Station
+						- Expected value of likelihood function
+						- Probability bounds on value of $BIC(k+1) - BIC(k)$
+						- Randomized algorithm that finds optimal $k^*$ with high probability
 						
 					</script>
 				</section>
-
-
-
-				<section data-markdown>
-					<script type="text/template">
-						## Going Forward
-
-						- Perspective piece (maybe in Nature) 
-						- Side event at United Nations General Assembly
-						- Day long scientific conference at Rockefeller
-						
-					</script>
-				</section>
-
-
-				<section data-markdown>
-					<script type="text/template">
-						## Role of JHU
-
-						- Sloan Digital Sky Survey
-						- Hubble Space Telescope
-						- BrainGPS
-						- Open Connectome & NeuroData
-						
-<br>
-
-						### International Brain Station
-					</script>
-				</section>
-
 
 				<section data-markdown>
 					<script type="text/template">
